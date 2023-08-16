@@ -4528,12 +4528,9 @@
 01806567-n	kaw:lemma	poyuh
 01806567-n	kaw:lemma	wartaka
 01819115-n	kaw:lemma	kakatu
-01846331-n	kaw:lemma	aṇḍah
-01846331-n	kaw:lemma	bebek
 01882125-n	kaw:lemma	kapkapan
 01882125-n	kaw:lemma	walaṅkapa
 01887623-n	kaw:lemma	andaka
-01887896-n	kaw:lemma	pĕḍet
 01922303-n	kaw:lemma	krimi	krĕmi
 01937909-n	kaw:lemma	lintah
 01937909-n	kaw:lemma	litah
@@ -4576,9 +4573,6 @@
 02437136-n	kaw:lemma	uṣṭra
 02824448-n	kaw:lemma	gĕnṭa
 02824448-n	kaw:lemma	ghaṇṭa	ghaṇṭā, ghĕṇṭa
-02897820-n	kaw:lemma	aśmawiṣṭaka
-02897820-n	kaw:lemma	iṣṭakā
-02897820-n	kaw:lemma	wiṣṭaka
 02913152-n	kaw:lemma	gĕḍoṅ
 03065424-n	kaw:lemma	huwĕl
 03122748-n	kaw:lemma	kukub
@@ -4708,9 +4702,6 @@
 07675156-n	kaw:lemma	lĕṅa
 07675156-n	kaw:lemma	tela	taila
 07719437-n	kaw:lemma	aṅkura
-07753592-n	kaw:lemma	gĕḍaṅ
-07753592-n	kaw:lemma	pisaṅ
-07753592-n	kaw:lemma	puntī	punti
 07764630-n	kaw:lemma	asĕm
 07764630-n	kaw:lemma	kamal
 07764630-n	kaw:lemma	kamalagi
@@ -4741,7 +4732,6 @@
 09213565-n	kaw:lemma	lalasta	lasta
 09213565-n	kaw:lemma	nadītaṭa
 09213565-n	kaw:lemma	nadītīra
-09213565-n	kaw:lemma	tatpāra
 09217230-n	kaw:lemma	pasisi
 09243906-n	kaw:lemma	lĕtoṅ
 09243906-n	kaw:lemma	papuṅ
@@ -4848,8 +4838,6 @@
 12900462-n	kaw:lemma	mirica
 12900462-n	kaw:lemma	sahaṅ
 12916511-n	kaw:lemma	jati
-13149506-n	kaw:lemma	mirica
-13149506-n	kaw:lemma	sahaṅ
 13163991-n	kaw:lemma	pallawa
 13164763-n	kaw:lemma	pallawa
 13165086-n	kaw:lemma	pallawa
@@ -4899,9 +4887,6 @@
 13746512-n	kaw:lemma	daśa
 13746672-n	kaw:lemma	ekādaśa
 13746672-n	kaw:lemma	sawĕlas
-13746785-n	kaw:lemma	dwādaśa
-13746785-n	kaw:lemma	kalihwĕlas
-13746785-n	kaw:lemma	rwawĕlas	rowĕlas
 13747199-n	kaw:lemma	tigawĕlas
 13747199-n	kaw:lemma	trayodaśa
 13747199-n	kaw:lemma	tridaśa
@@ -4951,8 +4936,6 @@
 14487184-n	kaw:lemma	lĕṅka
 14513944-n	kaw:lemma	pariwāra
 14516743-n	kaw:lemma	lĕtuh
-14656219-n	kaw:lemma	waliraṅ
-14656219-n	kaw:lemma	wariraṅ
 15038127-n	kaw:lemma	rasa
 15100644-n	kaw:lemma	samidha	samiddha
 15100644-n	kaw:lemma	samit
@@ -4982,7 +4965,6 @@
 00043480-v	kaw:lemma	mamukhawāsa	minukhawāsa
 00071178-v	kaw:lemma	anaṅsāra	sumaṅsāra
 00075021-v	kaw:lemma	ambosĕni
-00156601-v	kaw:lemma	awĕwĕh
 00177011-v	kaw:lemma	anawū
 00224901-v	kaw:lemma	aṅlĕsoni
 00369864-v	kaw:lemma	mahatis
