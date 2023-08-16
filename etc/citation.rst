@@ -1,0 +1,1 @@
+David Moeljadi and Zakariya Pamuji Aminullah. 2020. `Building the Old Javanese Wordnet <https://aclanthology.org/2020.lrec-1.359/>`_. In *Proceedings of the Twelfth Language Resources and Evaluation Conference*, pages 2940–2946, Marseille, France. European Language Resources Association.
