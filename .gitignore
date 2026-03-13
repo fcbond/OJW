@@ -1,4 +1,4 @@
 *~
-etc/cili
-etc/omw-data
-etc/WN-LMF
+.venv/
+build/
+external/
