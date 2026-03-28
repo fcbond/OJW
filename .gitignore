@@ -2,3 +2,5 @@
 .venv/
 build/
 external/
+build.log
+docs/*.db.gz

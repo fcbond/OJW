@@ -1,0 +1,9 @@
+# Wordnets to include in the OJW Cygnet build.
+# English (OEWN + TUFS) provides the base synset structure.
+# Indonesian is included as a linked language.
+# Old Javanese is the primary resource.
+en  = ["https://en-word.net/static/english-wordnet-2025.xml.gz",
+       "https://github.com/omwn/tufs/releases/download/2.0/tufs-en-2.0.tar.xz"]
+id  = ["https://github.com/omwn/omw-data/releases/download/v2.0/omw-id-2.0.tar.xz",
+       "https://github.com/omwn/tufs/releases/download/2.0/tufs-id-2.0.tar.xz"]
+kaw = ["https://github.com/davidmoeljadi/OJW/releases/latest/download/wnkaw.tar.xz"]
