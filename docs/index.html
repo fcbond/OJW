@@ -603,6 +603,7 @@
             const [pathNotFound, setPathNotFound] = useState(false);
             const isPopStateRef = useRef(false);
             const isInitialLoadRef = useRef(true);
+            const initialUrlHandledRef = useRef(false);
             const hoverTimeoutRef = useRef(null);
             const isLoadingRelationsRef = useRef(false);
             const simulationRef = useRef(null);
@@ -653,7 +654,7 @@
                     if (title) document.title = title + (tagline ? ` — ${tagline}` : '');
                     if (icon) {
                         const link = document.querySelector("link[rel='icon']");
-                        if (link) link.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${icon}</text></svg>`;
+                        if (link) link.href = `data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${encodeURIComponent(icon)}</text></svg>`;
                     }
                     if (displayLanguage && !localStorage.getItem('definitionLanguage')) {
                         setDefinitionLanguage(displayLanguage);
@@ -670,7 +671,7 @@
                 (async () => {
                     try {
                         await _configPromise;
-                        const dbFile = _siteConfig.db || 'cygnet.db.gz';
+                        const dbFile = _siteConfig.db || _siteConfig.databases?.main?.filename || 'cygnet.db.gz';
                         setDbProgress('Loading sql.js...');
                         const SQL = await initSqlJs({
                             locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${file}`
@@ -683,7 +684,7 @@
                             if (cached) {
                                 let stale = false;
                                 const cachedFilename = await idbGet('db-filename');
-                                if (cachedFilename && cachedFilename !== dbFile) {
+                                if (!cachedFilename || cachedFilename !== dbFile) {
                                     stale = true;
                                 } else {
                                     try {
@@ -951,13 +952,14 @@
                 setProvLoading(true);
                 setProvError(null);
                 try {
-                    const provFile = _siteConfig.provenanceDb || 'provenance.db.gz';
+                    await _configPromise;
+                    const provFile = _siteConfig.provenanceDb || _siteConfig.databases?.provenance?.filename || 'provenance.db.gz';
                     let buf;
                     try {
                         const cached = await idbGet('provdb');
                         if (cached) {
                             const cachedFilename = await idbGet('provdb-filename');
-                            if (cachedFilename && cachedFilename !== provFile) {
+                            if (!cachedFilename || cachedFilename !== provFile) {
                                 await Promise.all([idbDel('provdb'), idbDel('provdb-filename')]);
                             } else {
                                 buf = new Uint8Array(cached);
@@ -1088,13 +1090,15 @@
                             if (urlSearch) {
                                 setSearchTerm(urlSearch);
                                 setCurrentSearch(urlSearch);
+                                performSearch(urlSearch, urlSearchLang, urlPos, urlSenseFilter);
                             }
                         }
                     }
                 };
 
-                // Handle initial URL
-                if (dbReady) {
+                // Handle initial URL (only once, even if effect re-runs due to dep changes)
+                if (dbReady && !initialUrlHandledRef.current) {
+                    initialUrlHandledRef.current = true;
                     const hash = window.location.hash;
                     if (hash && hash !== '#/search') handlePopState();
                 }
@@ -1124,6 +1128,7 @@
                     const sid = r.sense_id.toString();
                     if (sense && sid !== sense) return;
 
+                    const prev = senseMap[sid];
                     senseMap[sid] = {
                         id: sid,
                         l: r.lemma,
@@ -1131,7 +1136,7 @@
                         c: r.synset_id,
                         ind: r.ind,
                         ontological_category: r.pos,
-                        matched_rank: r.matched_rank,
+                        matched_rank: prev ? Math.max(prev.matched_rank, r.matched_rank) : r.matched_rank,
                     };
                 });
 
@@ -2581,14 +2586,17 @@
                                 <div className="border-t border-gray-200 pt-4 mb-4">
                                     <h3 className="font-medium text-sm text-gray-700 mb-2">Download</h3>
                                     {(() => {
-                                        const dbFile = siteConfig.db || 'cygnet.db.gz';
-                                        const provFile = siteConfig.provenanceDb || 'provenance.db.gz';
+                                        const dbFile = siteConfig.db || siteConfig.databases?.main?.filename || 'cygnet.db.gz';
+                                        const provFile = siteConfig.provenanceDb || siteConfig.databases?.provenance?.filename || 'provenance.db.gz';
                                         const ghBase = 'https://github.com/rowanhm/cygnet/releases/latest/download/';
                                         const defaultDbs = [
                                             { filename: dbFile, url: ghBase + dbFile, description: 'The main lexical database, containing synsets, entries, senses, definitions, examples, and pronunciations across all languages.' },
                                             { filename: provFile, url: ghBase + provFile, description: 'Provenance records tracing every data point back to its source wordnet and original identifier.' },
                                         ];
-                                        const dbs = siteConfig.databases || defaultDbs;
+                                        const rawDbs = siteConfig.databases;
+                                        const dbs = !rawDbs ? defaultDbs
+                                            : Array.isArray(rawDbs) ? rawDbs
+                                            : [rawDbs.main, rawDbs.provenance].filter(Boolean);
                                         return (<>
                                             <p className="text-sm text-gray-600 mb-3">
                                                 The {siteName} databases are available for download below. Both are SQLite databases compressed with gzip.
@@ -2791,7 +2799,7 @@
                                     </div>
                                     <div>
                                         <a href="https://www.culturelab.psl.eu/" target="_blank" rel="noopener noreferrer" className="inline-block hover:opacity-80">
-                                            <img src="website_data/culturelab.png" alt="Culture Lab" className="h-14 inline-block" />
+                                            <img src="culturelab.png" alt="Culture Lab" className="h-14 inline-block" />
                                         </a>
                                     </div>
                                   </div>
