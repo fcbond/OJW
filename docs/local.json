@@ -9,6 +9,9 @@
   "db": "kaw-cygnet.db.gz",
   "provenanceDb": "kaw-provenance.db.gz",
 
+  "searchLanguage": "kaw",
+  "displayLanguage": "kaw",
+
   "databases": [
     {
       "filename": "kaw-cygnet.db.gz",
