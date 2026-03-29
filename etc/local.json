@@ -6,24 +6,21 @@
   "tagline": "A lexical resource for old Javanese",
   "icon": "📚",
 
-  "db": "kaw-cygnet.db.gz",
-  "provenanceDb": "kaw-provenance.db.gz",
-
   "searchLanguage": "kaw",
   "displayLanguage": "kaw",
 
-  "databases": [
-    {
+  "databases": {
+    "main": {
       "filename": "kaw-cygnet.db.gz",
       "url": "https://github.com/davidmoeljadi/OJW/releases/latest/download/kaw-cygnet.db.gz",
       "description": "The main OJW lexical database, containing synsets, entries, senses, definitions, and examples, linked to English and Indonesian."
     },
-    {
+    "provenance": {
       "filename": "kaw-provenance.db.gz",
       "url": "https://github.com/davidmoeljadi/OJW/releases/latest/download/kaw-provenance.db.gz",
       "description": "Provenance records tracing every data point back to its source and original identifier."
     }
-  ],
+  },
 
   "logo": {
     "src": "",
