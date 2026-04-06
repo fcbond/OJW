@@ -4,3 +4,4 @@ build/
 external/
 build.log
 docs/*.db.gz
+docs/*.db
