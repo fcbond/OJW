@@ -2,10 +2,14 @@
 #
 # build.sh - Build the Old Javanese Wordnet package and Cygnet databases
 #
+# Usage: bash build.sh [--rebuild]
+#   --rebuild   Wipe the cygnet work directory first (forces re-download of
+#               all wordnets — use when wordnets.toml URLs have changed)
+#
 # Produces:
 #   build/wnkaw-VERSION.tar.xz         — WordNet LMF package
-#   build/kaw-cygnet.db.gz              — Cygnet main database
-#   build/kaw-provenance.db.gz   — Cygnet provenance database
+#   docs/kaw-cygnet.db.gz              — Cygnet main database
+#   docs/kaw-provenance.db.gz          — Cygnet provenance database
 #
 # Prerequisites: uv, curl, tar, xz, wget, xmlstarlet, python3
 
@@ -15,6 +19,12 @@ VERSION="2026.03.14"
 DTD="WN-LMF-1.4.dtd"
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CYGNET_DIR="$(cd "$PROJECT_DIR/../cygnet" && pwd)"
+CYGNET_WORK="$PROJECT_DIR/build/cygnet-work"
+
+if [[ "${1:-}" == "--rebuild" ]]; then
+    echo "Cleaning cygnet work directory for full rebuild..."
+    rm -rf "$CYGNET_WORK"
+fi
 
 # Old Javanese	kaw	https://github.com/davidmoeljadi/OJW	CC BY 4.0
 mkdir -p external
@@ -84,8 +94,6 @@ tar -c -J -f "build/${NAME}.tar.xz" "$DIR"
 # ============================================================
 # CYGNET DATABASE BUILD
 # ============================================================
-CYGNET_WORK="$PROJECT_DIR/build/cygnet-work"
-
 echo ""
 echo "=== Building Cygnet databases ==="
 
